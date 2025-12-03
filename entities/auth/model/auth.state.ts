@@ -20,13 +20,16 @@ export const authAtom = atomWithStorage<AuthState>(
 export const loginAtom = atom(
   (get) => get(authAtom),
   async (_get, set, { email, password }: LoginRequest) => {
-    set(authAtom, (prev) => ({
+    await set(authAtom, (prev) => ({
       ...prev,
       isLoading: true,
     }));
 
     try {
-      const { data } = await http.post<LoginResponse>(API_AUTH.LOGIN, { email, password });
+      const { data } = await http.post<LoginResponse>(API_AUTH.LOGIN, {
+        email,
+        password,
+      });
 
       set(authAtom, {
         token: data.token,
@@ -42,7 +45,3 @@ export const loginAtom = atom(
     }
   },
 );
-
-
-
-
