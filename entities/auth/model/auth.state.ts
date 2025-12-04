@@ -31,13 +31,13 @@ export const loginAtom = atom(
         password,
       });
 
-      set(authAtom, {
+      await set(authAtom, {
         token: data.token,
         isLoading: false,
         error: null,
       });
     } catch (error) {
-      set(authAtom, {
+      await set(authAtom, {
         token: null,
         isLoading: false,
         error: (error as Error).message,

@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Input from "../shared/ui/Input/Input";
-import { COLOR } from "../shared/common/tokens";
-import Button from "../shared/ui/Button/Button";
-import { Link } from "expo-router";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Input from '../shared/ui/Input/Input';
+import { COLOR } from '../shared/common/tokens';
+import Button from '../shared/ui/Button/Button';
+import { Link } from 'expo-router';
 
 const RegisterPage = () => {
   return (
@@ -19,7 +19,7 @@ const RegisterPage = () => {
         <Input placeholder="Password" isPassword />
         <Button label="REGISTER" variant="primary" />
       </View>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: 'center' }}>
         <Text>
           You have an account?
           <Link href="/login"> Login</Link>
@@ -33,15 +33,15 @@ const styled = StyleSheet.create({
   layout: {
     flex: 1,
     padding: 16,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   logo: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 32,
   },
   containerForm: {
     gap: 16,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     marginBottom: 16,
   },
 });

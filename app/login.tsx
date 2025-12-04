@@ -4,12 +4,13 @@ import Input from '../shared/ui/Input/Input';
 import { COLOR } from '../shared/common/tokens';
 import Button from '../shared/ui/Button/Button';
 import { Link, useRouter } from 'expo-router';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { loginAtom } from '../entities/auth/model/auth.state';
 
 const Login = () => {
+  const [_auth, login] = useAtom(loginAtom);
+  const { token } = useAtomValue(loginAtom);
   const router = useRouter();
-  const [auth, login] = useAtom(loginAtom);
 
   const [data, setData] = useState({
     email: '',
@@ -22,10 +23,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (auth.token && auth.error === null) {
+    console.log('1');
+    if (token) {
       router.replace('/home');
     }
-  }, [auth]);
+  }, [token]);
 
   return (
     <View style={styled.layout}>
