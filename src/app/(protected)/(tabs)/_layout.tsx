@@ -7,7 +7,7 @@ export default function ProtectedLayout() {
       tabBar={(props) => <CustomeNavbar {...props} />}
       screenOptions={{
         headerShown: false,
-        sceneStyle: { paddingTop: 20, paddingHorizontal: 20 },
+        sceneStyle: { paddingTop: 50, paddingHorizontal: 20 },
       }}
     >
       <Tabs.Screen name="home" options={{ title: 'Home' }} />

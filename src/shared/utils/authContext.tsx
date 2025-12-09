@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SplashScreen, useRouter } from 'expo-router';
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
-import { http } from '../shared/api';
+import { http } from '../api';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -13,6 +13,7 @@ type LoginRequest = {
 type AuthState = {
   isLoggedIn: boolean;
   isReady: boolean;
+  isLoading: boolean;
   logIn: (data: LoginRequest) => Promise<void>;
   logOut: () => void;
 };
@@ -22,6 +23,7 @@ const authStoreKey = 'auth-key';
 export const AuthContext = createContext<AuthState>({
   isLoggedIn: false,
   isReady: false,
+  isLoading: false,
   logIn: () => Promise.resolve(),
   logOut: () => {},
 });
@@ -29,6 +31,8 @@ export const AuthContext = createContext<AuthState>({
 export function AuthProvider({ children }: PropsWithChildren) {
   const [isReady, setIsReady] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
   const storeAuthState = async (newState: { isLoggedIn: boolean }) => {
@@ -41,6 +45,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
   };
 
   const logIn = async (data: LoginRequest) => {
+    console.log('click');
+    setIsLoading(true);
     try {
       const res = await http.post('/auth/login', data);
 
@@ -53,6 +59,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   };
 
   const logOut = () => {
@@ -87,7 +95,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, [isReady]);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isReady, logIn, logOut }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, isReady, logIn, logOut, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

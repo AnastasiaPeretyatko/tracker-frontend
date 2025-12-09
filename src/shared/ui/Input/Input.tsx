@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Pressable,
   StyleSheet,
   TextInput,
   TextInputProps,
   View,
-} from "react-native";
-import FiEyeIcon from "../../icons/FiEyeIcon";
-import { COLOR } from "../../common/tokens";
-import FiEyeOffIcon from "../../icons/FiEyeOffIcon";
+} from 'react-native';
+import FiEyeIcon from '../../icons/FiEyeIcon';
+import { COLOR } from '../../common/tokens';
+import FiEyeOffIcon from '../../icons/FiEyeOffIcon';
 
 type Props = {
   isPassword?: boolean;
@@ -16,7 +16,7 @@ type Props = {
 
 const Input = ({ isPassword, ...props }: Props) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(
-    isPassword || false
+    isPassword || false,
   );
 
   return (
@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLOR.INPUT_BG,
     borderRadius: 6,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 6,
   },
   input: {
-    color: "black",
+    color: 'black',
     flex: 1,
   },
 });

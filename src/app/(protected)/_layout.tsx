@@ -1,6 +1,6 @@
+import { AuthContext } from '@/shared/utils/authContext';
 import { Redirect, Stack } from 'expo-router';
 import { useContext } from 'react';
-import { AuthContext } from '../../utils/authContext';
 
 export default function ProtectedLayout() {
   const authState = useContext(AuthContext);

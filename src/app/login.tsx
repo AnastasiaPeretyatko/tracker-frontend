@@ -4,7 +4,7 @@ import Input from '../shared/ui/Input/Input';
 import { COLOR } from '../shared/common/tokens';
 import Button from '../shared/ui/Button/Button';
 import { Link } from 'expo-router';
-import { AuthContext } from '../utils/authContext';
+import { AuthContext } from '@/shared/utils/authContext';
 
 const Login = () => {
   const authState = useContext(AuthContext);
@@ -39,7 +39,12 @@ const Login = () => {
           }
         />
         <Link href="/forgot-password">Forgot Password</Link>
-        <Button label="Login" variant="primary" onPress={onClickSignIn} />
+        <Button
+          label="Login"
+          variant="primary"
+          onPress={onClickSignIn}
+          loading={authState.isLoading}
+        />
       </View>
       <View style={{ alignItems: 'center' }}>
         <Text>

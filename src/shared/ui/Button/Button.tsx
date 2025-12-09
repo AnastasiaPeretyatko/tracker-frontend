@@ -1,15 +1,26 @@
 import React from 'react';
-import { Pressable, PressableProps, StyleSheet, Text } from 'react-native';
+import {
+  ActivityIndicator,
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+} from 'react-native';
 
 type Props = {
   label: string;
   variant?: 'base' | 'primary' | 'add_task';
+  loading?: boolean;
 } & PressableProps;
 
-const Button = ({ label, variant = 'base', ...props }: Props) => {
+const Button = ({ label, variant = 'base', loading, ...props }: Props) => {
   return (
     <Pressable style={[styles.base, styles[variant]]} {...props}>
-      <Text style={styles[variant]}>{label}</Text>
+      {loading ? (
+        <ActivityIndicator color={variant === 'primary' ? 'white' : 'black'} />
+      ) : (
+        <Text style={styles[variant]}>{label}</Text>
+      )}
     </Pressable>
   );
 };

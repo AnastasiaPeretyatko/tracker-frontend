@@ -1,5 +1,5 @@
 export const COLOR = {
-  INPUT_BG: '#F0F1F3',
+  INPUT_BG: '#e2e2e4ff',
   INPUT_PLACEHOLDER: '#C9CBCC',
 
   PRIMARY: '#000',

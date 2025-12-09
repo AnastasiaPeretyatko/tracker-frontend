@@ -1,9 +1,9 @@
+import { AuthProvider } from '@/shared/utils/authContext';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import moment from 'moment';
 import 'moment/locale/ru';
 import React from 'react';
-import { AuthProvider } from '../utils/authContext';
 
 moment.locale('ru');
 
