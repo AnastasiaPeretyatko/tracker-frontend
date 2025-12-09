@@ -1,0 +1,7 @@
+export const COLOR = {
+  INPUT_BG: '#F0F1F3',
+  INPUT_PLACEHOLDER: '#C9CBCC',
+
+  PRIMARY: '#000',
+  SECONDARY: '#fff',
+};
