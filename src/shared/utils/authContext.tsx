@@ -2,6 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SplashScreen, useRouter } from 'expo-router';
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { http } from '../api';
+import { useNotification } from '../hooks/useNotification';
+import { AxiosError } from 'axios';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,6 +17,7 @@ type AuthState = {
   isReady: boolean;
   isLoading: boolean;
   logIn: (data: LoginRequest) => Promise<void>;
+  signUp: (data: LoginRequest) => Promise<void>;
   logOut: () => void;
 };
 
@@ -25,6 +28,7 @@ export const AuthContext = createContext<AuthState>({
   isReady: false,
   isLoading: false,
   logIn: () => Promise.resolve(),
+  signUp: () => Promise.resolve(),
   logOut: () => {},
 });
 
@@ -33,6 +37,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { showErrorMessage, showSuccessMessage } = useNotification();
   const router = useRouter();
 
   const storeAuthState = async (newState: { isLoggedIn: boolean }) => {
@@ -45,7 +50,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
   };
 
   const logIn = async (data: LoginRequest) => {
-    console.log('click');
     setIsLoading(true);
     try {
       const res = await http.post('/auth/login', data);
@@ -55,9 +59,41 @@ export function AuthProvider({ children }: PropsWithChildren) {
         setIsLoggedIn(true);
         storeAuthState({ isLoggedIn: true });
         router.push('/(protected)/(tabs)/home');
+        showSuccessMessage({
+          title: 'Login successful',
+        });
       }
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        showErrorMessage({
+          title: error.response?.data.message,
+        });
+      }
+    }
+
+    setIsLoading(false);
+  };
+
+  const signUp = async (data: LoginRequest) => {
+    setIsLoading(true);
+    try {
+      const res = await http.post('/auth/register', data);
+
+      if (res.data.token) {
+        await AsyncStorage.setItem('token', res.data.token);
+        setIsLoggedIn(true);
+        storeAuthState({ isLoggedIn: true });
+        router.push('/(protected)/(tabs)/home');
+        showSuccessMessage({
+          title: 'Registration successful',
+        });
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        showErrorMessage({
+          title: error.response?.data.message,
+        });
+      }
     }
 
     setIsLoading(false);
@@ -96,7 +132,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, isReady, logIn, logOut, isLoading }}
+      value={{ isLoggedIn, isReady, logIn, signUp, logOut, isLoading }}
     >
       {children}
     </AuthContext.Provider>
