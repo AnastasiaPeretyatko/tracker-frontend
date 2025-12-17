@@ -21,6 +21,18 @@ export default function ProtectedLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="task/new"
+        options={{
+          presentation: 'formSheet',
+          gestureDirection: 'vertical',
+          animation: 'slide_from_bottom',
+          sheetGrabberVisible: true,
+          sheetInitialDetentIndex: 0,
+          sheetAllowedDetents: [0.5, 1.0],
+          keyboardHandlingEnabled: false,
+        }}
+      />
     </Stack>
   );
 }

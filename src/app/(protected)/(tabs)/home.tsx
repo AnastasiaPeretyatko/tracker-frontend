@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import moment from 'moment';
 import WeekCalendar from '../../../widgets/WeekCalandar/WeekCalendar';
-import TaskList from '../../../widgets/TaskItem/TaskList';
 import Button from '../../../shared/ui/Button/Button';
+import { useRouter } from 'expo-router';
 
 moment.locale('ru');
 
 const Home = () => {
+  const router = useRouter();
   return (
     <View
       style={{
@@ -26,9 +27,11 @@ const Home = () => {
         </View>
       </View>
       <WeekCalendar />
-      <TaskList />
-
-      <Button label="+" variant="add_task" />
+      <Button
+        label="+"
+        variant="add_task"
+        onPress={() => router.push('/task/new')}
+      />
     </View>
   );
 };

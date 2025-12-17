@@ -12,9 +12,10 @@ import FiEyeOffIcon from '../../icons/FiEyeOffIcon';
 
 type Props = {
   isPassword?: boolean;
+  variant?: 'outline';
 } & TextInputProps;
 
-const Input = ({ isPassword, ...props }: Props) => {
+const Input = ({ isPassword, variant, ...props }: Props) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(
     isPassword || false,
   );
@@ -22,7 +23,7 @@ const Input = ({ isPassword, ...props }: Props) => {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, variant && styles[variant]]}
         {...props}
         secureTextEntry={isPasswordVisible}
       />
@@ -44,7 +45,6 @@ const Input = ({ isPassword, ...props }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLOR.INPUT_BG,
     borderRadius: 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -52,8 +52,16 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   input: {
+    backgroundColor: COLOR.INPUT_BG,
     color: 'black',
     flex: 1,
+  },
+  outline: {
+    borderStyle: 'solid',
+    borderBottomWidth: 1,
+    borderColor: COLOR.INPUT_BG,
+    backgroundColor: 'transparent',
+    borderRadius: 0,
   },
 });
 

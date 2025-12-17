@@ -4,6 +4,16 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import FiHome from '../../shared/icons/FiHome';
 import BiUserCircle from '../../shared/icons/BiUserCircle';
 import { COLOR } from '../../shared/common/tokens';
+import FiCalendar from '@/shared/icons/FiCalendar';
+import Animated, {
+  FadeIn,
+  FadeOut,
+  LinearTransition,
+} from 'react-native-reanimated';
+import { LinearEasing } from 'react-native-reanimated/lib/typescript/css/easing';
+
+const AnimatedTouchableOpacity =
+  Animated.createAnimatedComponent(TouchableOpacity);
 
 const CustomeNavbar = ({
   state,
@@ -36,7 +46,8 @@ const CustomeNavbar = ({
         };
 
         return (
-          <TouchableOpacity
+          <AnimatedTouchableOpacity
+            layout={LinearTransition.springify().mass(0.5)}
             key={route.key}
             onPress={onPress}
             style={[
@@ -48,8 +59,16 @@ const CustomeNavbar = ({
               route.name,
               isFocused ? COLOR.PRIMARY : COLOR.SECONDARY,
             )}
-            {isFocused && <Text style={styles.text}>{label as string}</Text>}
-          </TouchableOpacity>
+            {isFocused && (
+              <Animated.Text
+                entering={FadeIn.duration(200)}
+                exiting={FadeOut.duration(200)}
+                style={styles.text}
+              >
+                {label as string}
+              </Animated.Text>
+            )}
+          </AnimatedTouchableOpacity>
         );
       })}
     </View>
@@ -61,6 +80,8 @@ const CustomeNavbar = ({
         return <FiHome width={18} color={color} />;
       case 'profile':
         return <BiUserCircle width={24} color={color} />;
+      case 'habits':
+        return <FiCalendar width={18} color={color} />;
     }
   }
 };
@@ -72,7 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLOR.PRIMARY,
-    width: '80%',
+    width: '60%',
     alignSelf: 'center',
     bottom: 40,
     borderRadius: 40,

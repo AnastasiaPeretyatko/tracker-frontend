@@ -10,19 +10,24 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-navigation/native": "^7.1.25",
     "axios": "^1.13.2",
     "babel-preset-expo": "^54.0.7",
     "expo": "^54.0.25",
     "expo-constants": "~18.0.10",
+    "expo-haptics": "^15.0.8",
     "expo-linking": "~8.0.9",
-    "expo-router": "~6.0.15",
+    "expo-router": "~6.0.19",
     "expo-status-bar": "~3.0.8",
     "jotai": "^2.15.2",
+    "lucide-react-native": "^0.561.0",
     "moment": "^2.30.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.68.0",
     "react-native": "0.81.5",
     "react-native-advanced-checkbox": "^2.0.6",
+    "react-native-gesture-handler": "^2.29.1",
     "react-native-reanimated": "~4.1.1",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
@@ -45,6 +50,5 @@
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.20.0"
   },
-  "private": true,
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "private": true
 }

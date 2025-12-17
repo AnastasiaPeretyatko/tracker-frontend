@@ -2,6 +2,7 @@
   "expo": {
     "name": "tracker",
     "slug": "tracker",
+    "schema": "my-project",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -30,7 +31,6 @@
     },
     "plugins": [
       "expo-router"
-    ],
-    "schema": "my-project"
+    ]
   }
 }

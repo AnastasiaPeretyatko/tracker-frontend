@@ -19,7 +19,7 @@ const Button = ({ label, variant = 'base', loading, ...props }: Props) => {
       {loading ? (
         <ActivityIndicator color={variant === 'primary' ? 'white' : 'black'} />
       ) : (
-        <Text style={styles[variant]}>{label}</Text>
+        <Text style={styles[`text_${variant}`]}>{label}</Text>
       )}
     </Pressable>
   );
@@ -42,12 +42,20 @@ const styles = StyleSheet.create({
   add_task: {
     width: 'auto',
     position: 'absolute',
-    bottom: 0,
     right: 0,
+    bottom: 100,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 15,
     backgroundColor: 'black',
+    color: 'white',
+    fontSize: 16,
+  },
+  text_add_task: {
+    color: 'white',
+    fontSize: 16,
+  },
+  text_primary: {
     color: 'white',
     fontSize: 16,
   },
