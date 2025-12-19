@@ -4,12 +4,13 @@ import { StyleSheet, Text, TextProps, View } from 'react-native';
 type Props = {
   size?: 'sm' | 'md' | 'lg' | 'base';
   children: React.ReactNode | string;
+  variant?: 'describe';
 } & TextProps;
 
-const TextUI = ({ children, size = 'base', ...props }: Props) => {
+const TextUI = ({ children, size = 'base', variant, ...props }: Props) => {
   return (
     <View>
-      <Text style={[styles[size]]} {...props}>
+      <Text style={[styles[size], variant && styles[variant]]} {...props}>
         {children}
       </Text>
     </View>
@@ -31,6 +32,10 @@ const styles = StyleSheet.create({
   },
   xl: {
     fontSize: 40,
+  },
+  describe: {
+    fontSize: 16,
+    color: 'gray',
   },
 });
 

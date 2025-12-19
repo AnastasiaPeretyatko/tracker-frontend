@@ -58,7 +58,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         await AsyncStorage.setItem('token', res.data.token);
         setIsLoggedIn(true);
         storeAuthState({ isLoggedIn: true });
-        router.push('/(protected)/(tabs)/home');
+        router.push('/(protected)/(tabs)/index');
         showSuccessMessage({
           title: 'Login successful',
         });
@@ -83,7 +83,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         await AsyncStorage.setItem('token', res.data.token);
         setIsLoggedIn(true);
         storeAuthState({ isLoggedIn: true });
-        router.push('/(protected)/(tabs)/home');
+        router.push('/(protected)/(tabs)/index');
         showSuccessMessage({
           title: 'Registration successful',
         });

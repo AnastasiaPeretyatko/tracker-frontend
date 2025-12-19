@@ -10,8 +10,8 @@ export default function ProtectedLayout() {
         sceneStyle: { paddingTop: 50, paddingHorizontal: 20 },
       }}
     >
-      <Tabs.Screen name="habits" options={{ title: 'Habits' }} />
-      <Tabs.Screen name="home" options={{ title: 'Home' }} />
+      <Tabs.Screen name="hobbies" options={{ title: 'Hobbies' }} />
+      <Tabs.Screen name="index" options={{ title: 'Home' }} />
       <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
     </Tabs>
   );

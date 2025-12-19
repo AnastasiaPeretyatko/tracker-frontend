@@ -10,7 +10,6 @@ import Animated, {
   FadeOut,
   LinearTransition,
 } from 'react-native-reanimated';
-import { LinearEasing } from 'react-native-reanimated/lib/typescript/css/easing';
 
 const AnimatedTouchableOpacity =
   Animated.createAnimatedComponent(TouchableOpacity);
@@ -76,11 +75,11 @@ const CustomeNavbar = ({
 
   function getIconByRouteName(routeName: string, color: string) {
     switch (routeName) {
-      case 'home':
+      case 'index':
         return <FiHome width={18} color={color} />;
       case 'profile':
         return <BiUserCircle width={24} color={color} />;
-      case 'habits':
+      case 'hobbies':
         return <FiCalendar width={18} color={color} />;
     }
   }

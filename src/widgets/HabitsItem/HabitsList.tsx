@@ -8,9 +8,9 @@ import TextUI from '@/shared/ui/TextUI';
 const HabitsList = () => {
   const [tasks, fetchTasks] = useAtom(tasksAtomWithFetch);
 
-  useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks]);
+  // useEffect(() => {
+  //   fetchTasks();
+  // }, [fetchTasks]);
 
   if (tasks.isLoading) {
     return <TextUI>Loading...</TextUI>;

@@ -40,7 +40,6 @@ export const tasksAtomWithFetch = atom(
     }));
     try {
       const { data } = await http.get('/tasks/all');
-      console.log({ data });
       set(taskAtom, (prev) => ({
         ...prev,
         tasks: data,

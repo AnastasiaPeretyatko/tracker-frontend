@@ -1,18 +1,10 @@
-import Badget from '@/shared/ui/Badget';
 import Button from '@/shared/ui/Button/Button';
 import Input from '@/shared/ui/Input/Input';
 import TextUI from '@/shared/ui/TextUI';
 import React from 'react';
-import {
-  KeyboardAvoidingView,
-  Modal,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { http } from '@/shared/api';
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useRealm } from '@realm/react';
 
 enum TASK_SCHEDULE_TYPE {
   DAILY = 'daily',
@@ -29,22 +21,24 @@ type Inputs = {
 };
 
 const NewTaskPage = () => {
-  const {
-    handleSubmit,
-    setValue,
-    control,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const realm = useRealm();
+
+  const [data, setData] = React.useState({
+    title: '',
+  });
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
-      const response = await http.post('/tasks', data);
-      console.log({ response, data: response.data });
-    } catch (error) {
-      console.log(error);
-    }
+  const onSubmit = () => {
+    realm.write(() => {
+      realm.create('Hibbies', {
+        _id: new Realm.BSON.UUID(),
+        title: data.title,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+    });
+
+    router.back();
   };
 
   const onClose = () => {
@@ -59,50 +53,14 @@ const NewTaskPage = () => {
       <View style={styles.sheet}>
         <View style={{ flex: 1, gap: 10 }}>
           <TextUI size="md">New task</TextUI>
-          <Controller
-            control={control}
-            name="title"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Title"
-                variant="outline"
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
+          <Input
+            placeholder="Title"
+            onChangeText={(text) =>
+              setData((prev) => ({ ...prev, title: text }))
+            }
           />
-          <Controller
-            control={control}
-            name="description"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Description"
-                variant="outline"
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
-          <TextUI size="sm">Schedule</TextUI>
-          <View style={{ flexWrap: 'wrap', flexDirection: 'row', gap: 10 }}>
-            {Object.values(TASK_SCHEDULE_TYPE).map((type) => (
-              <Badget
-                key={type}
-                onPress={() => setValue('type', type)}
-                selected={type === watch('type')}
-              >
-                {type}
-              </Badget>
-            ))}
-          </View>
         </View>
-        <Button
-          label="Save"
-          variant="primary"
-          onPress={handleSubmit(onSubmit)}
-        />
+        <Button label="Save" variant="primary" onPress={onSubmit} />
       </View>
     </KeyboardAvoidingView>
   );

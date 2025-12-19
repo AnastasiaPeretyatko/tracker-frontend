@@ -19,6 +19,7 @@ export default function ProtectedLayout() {
         name="(tabs)"
         options={{
           headerShown: false,
+          statusBarStyle: 'dark',
         }}
       />
       <Stack.Screen
@@ -31,6 +32,18 @@ export default function ProtectedLayout() {
           sheetInitialDetentIndex: 0,
           sheetAllowedDetents: [0.5, 1.0],
           keyboardHandlingEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="hobbies/new"
+        options={{
+          presentation: 'modal',
+          gestureDirection: 'vertical',
+          animation: 'default',
+          // sheetGrabberVisible: true,
+          // sheetInitialDetentIndex: 0,
+          // sheetAllowedDetents: [0.7, 1.0],
+          // keyboardHandlingEnabled: false,
         }}
       />
     </Stack>
