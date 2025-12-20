@@ -95,14 +95,7 @@ const NewHobbiesPage = () => {
           Today
         </Badget>
         {isVisibleDatePicker && <DatePicker />}
-        <TimerPicker
-          hourLabel=":"
-          LinearGradient={LinearGradient}
-          MaskedView={MaskedView}
-          minuteLabel=""
-          padWithNItems={2}
-          hideSeconds
-        />
+
         <Button
           label="Create"
           variant="primary"

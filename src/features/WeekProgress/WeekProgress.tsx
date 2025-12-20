@@ -2,6 +2,7 @@ import { Hobbies } from '@/entities/hobbies/model/hobbies.entity';
 import { HobbiesLog } from '@/entities/hobbies_log/model/hobbies_log.entity';
 import { getCurrentWeek } from '@/shared/helpers';
 import { useQuery, useRealm } from '@realm/react';
+import moment from 'moment';
 import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
@@ -11,6 +12,12 @@ interface Props {
 
 const WeekProgress = ({ hobby }: Props) => {
   const week = getCurrentWeek();
+
+  const last5Days = Array.from(
+    { length: 5 },
+    (_, i) => moment().subtract(4 - i, 'days'),
+    // .format('ddd'),
+  );
 
   const hobbyLogs = useQuery(HobbiesLog).filtered('hobbies == $0', hobby);
 
@@ -22,7 +29,7 @@ const WeekProgress = ({ hobby }: Props) => {
         justifyContent: 'space-between',
       }}
     >
-      {week.map((day) => {
+      {last5Days.map((day) => {
         const logForDay = hobbyLogs?.find((log) => day.isSame(log.date, 'day'));
 
         return (
@@ -92,6 +99,8 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: 22,
+    height: 22,
   },
   checked: {
     borderRadius: 5,

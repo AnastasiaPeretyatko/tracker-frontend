@@ -12,6 +12,8 @@ const HobbiesPage = () => {
   const router = useRouter();
   const hobbies = useQuery(Hobbies);
 
+  const currentDay = moment().format('LL');
+
   const last5Days = Array.from({ length: 5 }, (_, i) =>
     moment()
       .subtract(4 - i, 'days')
@@ -19,9 +21,19 @@ const HobbiesPage = () => {
   );
 
   return (
-    <View style={{ flexDirection: 'column', gap: 16, position: 'relative' }}>
+    <View style={styles.wrapper}>
       <View style={styles.header}>
-        <TextUI size="lg">Hobby</TextUI>
+        <View>
+          <TextUI size="md">Hobbie</TextUI>
+          <TextUI size="sm" variant="describe">
+            {currentDay}
+          </TextUI>
+        </View>
+        <Button variant="add_task" onPress={() => router.push('/hobbies/new')}>
+          +
+        </Button>
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
         <View
           style={{
             flexDirection: 'row',
@@ -30,8 +42,8 @@ const HobbiesPage = () => {
           }}
         >
           {last5Days.map((day) => (
-            <TextUI size="sm" key={day}>
-              {day.toUpperCase()}
+            <TextUI size="sm" key={day} variant="describe">
+              {day}
             </TextUI>
           ))}
         </View>
@@ -43,24 +55,34 @@ const HobbiesPage = () => {
       ) : (
         <FlatList
           data={hobbies}
+          style={{ flexDirection: 'column', flex: 1 }}
+          ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
           renderItem={({ item }) => <HobbyCard hobby={item} />}
         />
       )}
 
-      <Button
+      {/* <Button
         label="Add task"
         variant="primary"
         onPress={() => router.push('/hobbies/new')}
-      />
+      /> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'column',
+    gap: 16,
+    position: 'relative',
+    flex: 1,
+  },
   header: {
+    // flexDirection: 'column',
+    // alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 

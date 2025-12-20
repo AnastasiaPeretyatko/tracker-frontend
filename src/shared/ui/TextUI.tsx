@@ -18,6 +18,9 @@ const TextUI = ({ children, size = 'base', variant, ...props }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  kek: {
+    fontFamily: 'Roboto',
+  },
   sm: {
     fontSize: 16,
   },

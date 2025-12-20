@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -8,18 +8,25 @@ import {
 } from 'react-native';
 
 type Props = {
-  label: string;
+  label?: string;
   variant?: 'base' | 'primary' | 'add_task';
   loading?: boolean;
+  children?: ReactNode | string;
 } & PressableProps;
 
-const Button = ({ label, variant = 'base', loading, ...props }: Props) => {
+const Button = ({
+  label,
+  variant = 'base',
+  loading,
+  children,
+  ...props
+}: Props) => {
   return (
     <Pressable style={[styles.base, styles[variant]]} {...props}>
       {loading ? (
         <ActivityIndicator color={variant === 'primary' ? 'white' : 'black'} />
       ) : (
-        <Text style={styles[`text_${variant}`]}>{label}</Text>
+        <Text style={styles[`text_${variant}`]}>{children}</Text>
       )}
     </Pressable>
   );
@@ -41,9 +48,9 @@ const styles = StyleSheet.create({
   },
   add_task: {
     width: 'auto',
-    position: 'absolute',
-    right: 0,
-    bottom: 100,
+    // position: 'absolute',
+    // right: 0,
+    // bottom: 100,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 15,

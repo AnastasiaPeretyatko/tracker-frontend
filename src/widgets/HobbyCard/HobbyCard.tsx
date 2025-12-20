@@ -10,10 +10,23 @@ interface Props {
 
 const HobbyCard = ({ hobby }: Props) => {
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 4,
+        height: 60,
+      }}
+    >
       <View>
         <TextUI size="base">{hobby.title}</TextUI>
-        <TextUI size="sm">{hobby.description}</TextUI>
+        {hobby.description && (
+          <TextUI size="sm" variant="describe" numberOfLines={1}>
+            {hobby.description}
+          </TextUI>
+        )}
       </View>
       <WeekProgress hobby={hobby} />
     </View>

@@ -14,14 +14,13 @@ export default function ProtectedLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen
-        name="(tabs)"
-        options={{
-          headerShown: false,
-          statusBarStyle: 'dark',
-        }}
-      />
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        statusBarStyle: 'dark',
+      }}
+    >
+      <Stack.Screen name="(tabs)" />
       <Stack.Screen
         name="task/new"
         options={{
