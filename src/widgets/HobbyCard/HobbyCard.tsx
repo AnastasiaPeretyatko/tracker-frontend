@@ -1,6 +1,7 @@
 import { Hobbies } from '@/entities/hobbies/model/hobbies.entity';
 import WeekProgress from '@/features/WeekProgress/WeekProgress';
 import TextUI from '@/shared/ui/TextUI';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { View } from 'react-native';
 
@@ -9,6 +10,12 @@ interface Props {
 }
 
 const HobbyCard = ({ hobby }: Props) => {
+  const router = useRouter();
+
+  const onClickInfoPage = () => {
+    router.push(`/hobbies/${hobby._id.toString()}`);
+  };
+
   return (
     <View
       style={{
@@ -20,14 +27,9 @@ const HobbyCard = ({ hobby }: Props) => {
         height: 60,
       }}
     >
-      <View>
-        <TextUI size="base">{hobby.title}</TextUI>
-        {hobby.description && (
-          <TextUI size="sm" variant="describe" numberOfLines={1}>
-            {hobby.description}
-          </TextUI>
-        )}
-      </View>
+      <TextUI onPress={onClickInfoPage} size="base">
+        {hobby.title}
+      </TextUI>
       <WeekProgress hobby={hobby} />
     </View>
   );
