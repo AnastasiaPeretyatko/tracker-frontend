@@ -1,3 +1,4 @@
+import { COLOR } from '@/shared/common/tokens';
 import React, { ReactNode } from 'react';
 import {
   ActivityIndicator,
@@ -9,9 +10,10 @@ import {
 
 type Props = {
   label?: string;
-  variant?: 'base' | 'primary' | 'add_task';
+  variant?: 'base' | 'primary' | 'add_task' | 'tab' | 'close';
   loading?: boolean;
   children?: ReactNode | string;
+  isSelected?: boolean;
 } & PressableProps;
 
 const Button = ({
@@ -19,10 +21,14 @@ const Button = ({
   variant = 'base',
   loading,
   children,
+  isSelected = false,
   ...props
 }: Props) => {
   return (
-    <Pressable style={[styles.base, styles[variant]]} {...props}>
+    <Pressable
+      style={[styles.base, styles[variant], isSelected && styles.selected]}
+      {...props}
+    >
       {loading ? (
         <ActivityIndicator color={variant === 'primary' ? 'white' : 'black'} />
       ) : (
@@ -34,10 +40,11 @@ const Button = ({
 
 const styles = StyleSheet.create({
   base: {
-    width: '100%',
+    width: 'auto',
     alignContent: 'center',
     alignItems: 'center',
-    padding: 16,
+    justifyContent: 'center', // 👈 вертикаль
+    padding: 10,
     borderRadius: 6,
   },
 
@@ -65,6 +72,22 @@ const styles = StyleSheet.create({
   text_primary: {
     color: 'white',
     fontSize: 16,
+  },
+  tab: {
+    flexGrow: 1,
+  },
+  selected: {
+    backgroundColor: 'white',
+  },
+  close: {
+    width: 30,
+    height: 30,
+    padding: 5,
+    backgroundColor: COLOR.GRAY_LIGHT,
+    borderRadius: 16,
+  },
+  text_close: {
+    color: COLOR.GRAY_PRIMARY,
   },
 });
 

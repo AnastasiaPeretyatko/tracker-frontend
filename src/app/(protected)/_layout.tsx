@@ -34,7 +34,7 @@ export default function ProtectedLayout() {
         }}
       />
       <Stack.Screen
-        name="hobbies/new"
+        name="hobbies/[id]"
         options={{
           presentation: 'modal',
           gestureDirection: 'vertical',

@@ -56,7 +56,7 @@ const CustomeNavbar = ({
           >
             {getIconByRouteName(
               route.name,
-              isFocused ? COLOR.PRIMARY : COLOR.SECONDARY,
+              isFocused ? COLOR.PRIMARY : COLOR.PRIMARY,
             )}
             {isFocused && (
               <Animated.Text
@@ -87,14 +87,15 @@ const CustomeNavbar = ({
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    // position: 'absolute',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLOR.PRIMARY,
-    width: '60%',
+    // backgroundColor: COLOR.PRIMARY,
+    width: '100%',
     alignSelf: 'center',
-    bottom: 40,
+    // bottom: 40,
+    bottom: 20,
     borderRadius: 40,
     paddingHorizontal: 12,
     paddingVertical: 15,
