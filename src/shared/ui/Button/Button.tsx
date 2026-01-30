@@ -10,7 +10,7 @@ import {
 
 type Props = {
   label?: string;
-  variant?: 'base' | 'primary' | 'add_task' | 'tab';
+  variant?: 'base' | 'primary' | 'add_task' | 'tab' | 'close';
   loading?: boolean;
   children?: ReactNode | string;
   isSelected?: boolean;
@@ -78,6 +78,16 @@ const styles = StyleSheet.create({
   },
   selected: {
     backgroundColor: 'white',
+  },
+  close: {
+    width: 30,
+    height: 30,
+    padding: 5,
+    backgroundColor: COLOR.GRAY_LIGHT,
+    borderRadius: 16,
+  },
+  text_close: {
+    color: COLOR.GRAY_PRIMARY,
   },
 });
 

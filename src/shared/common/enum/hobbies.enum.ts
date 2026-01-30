@@ -20,3 +20,5 @@ export const month = [
   'Nov',
   'Dec',
 ];
+
+export const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];

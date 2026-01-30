@@ -34,18 +34,6 @@ export default function ProtectedLayout() {
         }}
       />
       <Stack.Screen
-        name="hobbies/new"
-        options={{
-          presentation: 'modal',
-          gestureDirection: 'vertical',
-          animation: 'default',
-          // sheetGrabberVisible: true,
-          // sheetInitialDetentIndex: 0,
-          // sheetAllowedDetents: [0.7, 1.0],
-          // keyboardHandlingEnabled: false,
-        }}
-      />
-      <Stack.Screen
         name="hobbies/[id]"
         options={{
           presentation: 'modal',
