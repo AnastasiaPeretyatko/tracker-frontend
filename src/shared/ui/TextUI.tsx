@@ -2,24 +2,25 @@ import React from 'react';
 import { StyleSheet, Text, TextProps, View } from 'react-native';
 
 type Props = {
-  size?: 'sm' | 'md' | 'lg' | 'base';
+  size?: 'sm' | 'md' | 'lg' | 'base' | 'xs';
   children: React.ReactNode | string;
   variant?: 'describe';
 } & TextProps;
 
 const TextUI = ({ children, size = 'base', variant, ...props }: Props) => {
   return (
-    <View>
-      <Text style={[styles[size], variant && styles[variant]]} {...props}>
-        {children}
-      </Text>
-    </View>
+    <Text style={[styles[size], variant && styles[variant]]} {...props}>
+      {children}
+    </Text>
   );
 };
 
 const styles = StyleSheet.create({
   kek: {
     fontFamily: 'Roboto',
+  },
+  xs: {
+    fontSize: 14,
   },
   sm: {
     fontSize: 16,
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   describe: {
-    fontSize: 16,
+    // fontSize: 16,
     color: 'gray',
   },
 });

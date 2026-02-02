@@ -4,3 +4,4 @@ export * from './FiHome';
 export * from './BiUserCircle';
 export * from './FiCalendar';
 export * from './BsCheck';
+export * from './FireIcon';

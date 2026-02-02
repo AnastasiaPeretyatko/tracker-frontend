@@ -27,6 +27,8 @@ const CreateHobbyModal = ({ bottomSheetRef }: Props) => {
   const [title, setTitle] = React.useState('');
 
   const handleSaveForm = () => {
+    if (!title) return;
+
     realm.write(() => {
       const schedule = realm.create('HobbiesSchedule', {
         _id: new Realm.BSON.UUID(),

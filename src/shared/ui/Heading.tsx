@@ -3,7 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { COLOR } from '../common/tokens';
 
 type Props = {
-  type: 'h1' | 'h2' | 'h3';
+  type: 'h1' | 'h2' | 'h3' | 'h4';
   children: ReactNode | string;
 };
 
@@ -25,8 +25,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   h3: {
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: 16,
+  },
+  h4: {
+    fontWeight: 500,
+    fontSize: 12,
   },
 });
 

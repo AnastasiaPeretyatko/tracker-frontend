@@ -3,6 +3,7 @@ import Button from '@/shared/ui/Button/Button';
 import TextUI from '@/shared/ui/TextUI';
 import CreateHobbyModal from '@/widgets/CreateHobbyModal';
 import HobbyCard from '@/widgets/HobbyCard/HobbyCard';
+import HobbyCardV2 from '@/widgets/HobbyCard/HobbyCardV2';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useQuery } from '@realm/react';
 import moment from 'moment';
@@ -28,7 +29,7 @@ const HobbiesPage = () => {
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1, height: '100%' }}>
+    <GestureHandlerRootView style={{ flex: 1, paddingHorizontal: 6 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <Button onPress={openSheet}>ADD</Button>
         <View style={styles.wrapper}>
@@ -40,7 +41,7 @@ const HobbiesPage = () => {
               </TextUI>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+          {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -54,7 +55,7 @@ const HobbiesPage = () => {
                 </TextUI>
               ))}
             </View>
-          </View>
+          </View> */}
           {hobbies.length === 0 ? (
             <View>
               <TextUI size="sm">You don't have any habits yet.</TextUI>
@@ -62,9 +63,11 @@ const HobbiesPage = () => {
           ) : (
             <FlatList
               data={hobbies}
-              style={{ flexDirection: 'column', flex: 1 }}
-              ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-              renderItem={({ item }) => <HobbyCard hobby={item} />}
+              numColumns={2}
+              keyExtractor={(item) => item._id}
+              columnWrapperStyle={{ gap: 12 }} // расстояние между колонками
+              contentContainerStyle={{ gap: 12 }} // расстояние между строками
+              renderItem={({ item }) => <HobbyCardV2 hobby={item} />}
             />
           )}
         </View>
@@ -76,6 +79,7 @@ const HobbiesPage = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
+    width: '100%',
     flexDirection: 'column',
     gap: 16,
     position: 'relative',
